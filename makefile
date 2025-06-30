@@ -67,7 +67,7 @@ til_yesterday: shc match
 	CFLAGS="$(CFLAGS)" ./shc $(SHCFLAGS) -vv -e `date "+%d/%m/%Y"` -f match
 	@echo '***	Running a compiled test script!'
 	@echo '***	It must fail showing "./match.x: has expired!"'
-	./match.x
+	./match.x || true
 
 ask_for_install:
 	@echo '***	¿Do you want to install shc?'
