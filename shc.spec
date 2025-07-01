@@ -1,16 +1,15 @@
 %global debug_package %{nil}
 %global forgeurl https://github.com/gonoph/shc
-%global archiveext tgz
+# %global archiveext tgz
 Name:		shc
 Version:	3.8.9b
-%forgemeta -i -v
+%forgemeta
 Release:	1%{?dist}
 Summary:	A generic shell script compiler.
 
 License:	GPL
 URL:		%{forgeurl}
 Source0:	%{forgesource}
-Patch0:		makefile.patch
 
 Requires:	gcc
 BuildRequires:	gcc
@@ -24,7 +23,6 @@ compiled and linked to produce a stripped binary executable. Use with care.
 
 %prep
 %setup -q
-%patch0 -p0
 
 
 %build
