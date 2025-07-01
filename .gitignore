@@ -1,3 +1,7 @@
+.*.swp
+shc
+shc-3.8.9b.tgz
+shc-3.8.9b/
 # Prerequisites
 *.d
 
