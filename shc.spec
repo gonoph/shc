@@ -1,6 +1,6 @@
 %global debug_package %{nil}
 %global forgeurl https://github.com/gonoph/shc
-# %global archiveext tgz
+
 Name:		shc
 Version:	3.8.9b
 %forgemeta
