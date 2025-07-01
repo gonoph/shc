@@ -3,13 +3,12 @@
 
 Name:		shc
 Version:	3.8.9b
-%forgemeta
 Release:	1%{?dist}
 Summary:	A generic shell script compiler.
 
 License:	GPL
 URL:		%{forgeurl}
-Source0:	%{forgesource}
+Source0:	https://github.com/gonoph/shc/archive/refs/tags/v3.8.9b.tar.gz
 
 Requires:	gcc
 BuildRequires:	gcc
@@ -150,4 +149,3 @@ make CFLAGS="-Wall -O2 -Werror=implicit-function-declaration"
   compiled. If anybody tries to change the excuting shell, .x will refuse to
   execute.
 - The generated .x.c source code is now readable.
-
