@@ -1,7 +1,16 @@
 # Makefile
 #
 
-INSTALL_PATH = /usr/local
+prefix = /usr/local
+exec_prefix = $(prefix)
+bindir = $(exec_prefix)/bin
+datarootdir = $(prefix)/share
+datadir = $(datarootdir)
+mandir = $(datarootdir)/man
+man1dir = $(mandir)/man1
+version = 3.8.9b
+distdir = shc-$(version)
+distfile = $(distdir).tgz
 
 # For SCO
 CFLAGS = -b elf -O -D_SVID
@@ -74,10 +83,12 @@ ask_for_install:
 	@echo '***	Please try...	make install'
 
 install: shc
-	@echo '***	Installing shc and shc.1 on '$(INSTALL_PATH)
-	@echo -n '***	¿Do you want to continue? '; read ANS; case "$$ANS" in y|Y|yes|Yes|YES) ;; *) exit 1;; esac;
-	install -c -s shc $(INSTALL_PATH)/bin/
-	install -c -m 644 shc.1 $(INSTALL_PATH)/man/man1/
+	@echo '***	Installing shc and shc.1 on '$(DESTDIR)$(prefix)
+	mkdir -p $(DESTDIR)$(bindir)
+	install -c -s shc $(DESTDIR)$(bindir)
+	mkdir -p $(DESTDIR)$(man1dir)
+	install -c -m 644 shc.1 $(DESTDIR)$(man1dir)
+	gzip -fv $(DESTDIR)$(man1dir)/shc.1
 
 clean:
 	rm -f *.o *~ *.x.c
@@ -85,3 +96,16 @@ clean:
 cleanall: clean
 	rm -f shc *.x
 
+clean-all: cleanall dist-clean
+
+$(distdir):
+	mkdir -p $(distdir)
+	for i in CHANGES Copying LICENSE README.md makefile makefile.patch match pru.sh shc-3.8.9b.c shc.1 shc.README shc.c shc.html shc.md shc.spec test.bash test.csh test.ksh testit ; do cp $$i $(distdir); done
+
+$(distfile):
+	tar -cvzf $(distfile) $(distdir)
+
+dist: $(distdir) $(distfile)
+
+dist-clean:
+	rm -rf $(distdir) $(distfile)
